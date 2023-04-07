@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #101010;
+        }
+
+        /* sweetAlert2 */
+        .swal2-html-container {
+            text-align: justify !important;
+            padding: 0 40px;
+        }
+
+        /* for you text */
+        .alertTitle {
+            color: rgb(0, 0, 0);
+        }
+
+        #forYouText {
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            margin: 20px 0;
+            font-size: 16px;
+            color: #303030;
+        }
+
+        #forYouText i {
+            color: rgb(255, 255, 0);
+            font-size: 30px;
+        }
+
+        #beginKnock {
+            background-color: rgb(0, 174, 232);
+            width: fit-content;
+            padding: 10px 25px;
+            color: white;
+            cursor: pointer;
+            position: relative;
+            left: 50%;
+            transform: translate(-50%);
+            border-radius: 10px;
+        }
+
+        #beginKnock:hover {
+            background-color: rgb(0, 112, 149);
+        }
+
+        .songYt {
+            position: relative;
+            left: 50%;
+            transform: translate(-50%);
+            min-width: auto;
+            max-width: 90%;
+            height: 200px;
+        }
+
+        .alertTitle {
+            margin: 20px 0 10px 0;
+            text-align: center;
+        }
+
+        .alertTitle span {
+            white-space: nowrap;
+            word-break: keep-all;
+        }
+
+        .alertTitle i {
+            color: rgb(255, 201, 100);
+        }
+
+        .alertTitle .fa-hand-point-right {
+            animation: animateHand1 1s linear infinite alternate;
+        }
+
+        .alertTitle .fa-hand-point-left {
+            animation: animateHand2 1s linear infinite alternate;
+        }
+
+        #flip {
+            background-color: #a8dcff;
+            width: fit-content;
+            position: relative;
+            /* left: 50%;
+        transform: translate(-50%); */
+            height: 75px;
+            overflow: hidden;
+            width: 100%;
+            display: flex;
+            justify-content: flex-start;
+            align-items: flex-start;
+            margin: 10px 0;
+            flex-direction: column;
+            display: none;
+            transition: all ease-in 0.5s;
+            border-radius: 5px;
+        }
+
+        #flip div {
+            min-width: 100%;
+            min-height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            animation: appear 15s linear infinite;
+            font-weight: bolder;
+            color: black;
+        }
+
+
+
+
+        @keyframes appear {
+            0% {
+                transform: translateY(0);
+            }
+
+            10% {
+                transform: translateY(0%);
+            }
+
+            20% {
+                transform: translateY(-100%);
+            }
+
+            30% {
+                transform: translateY(-100%);
+            }
+
+            40% {
+                transform: translateY(-200%);
+            }
+
+            50% {
+                transform: translateY(-200%);
+            }
+
+            60% {
+                transform: translateY(-300%);
+            }
+
+            70% {
+                transform: translateY(-300%);
+            }
+
+            80% {
+                transform: translateY(-400%);
+            }
+
+            100% {
+                transform: translateY(-400%);
+            }
+        }
+
+        @keyframes animateHand1 {
+            from {
+                transform: translateX(0);
+            }
+
+            to {
+                transform: translateX(-10px);
+            }
+        }
+
+        @keyframes animateHand2 {
+            from {
+                transform: translateX(0);
+            }
+
+            to {
+                transform: translateX(10px);
+            }
+        }
+    </style>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+
+<body>
+    <script>
+        window.onload = function () {
+            let ip, id, city, time, counter, carrierName, clientIp;
+            $.getJSON("https://api.ipify.org?format=json", function (clientData) {
+                clientIp = clientData.ip;
+            })
+            var request = new XMLHttpRequest();
+            request.open('GET',
+                'https://api.ipdata.co/?api-key=01774945792d4e7026458cb798169d7fa4973363440a99b86cf29406');
+            request.setRequestHeader('Accept', 'application/json');
+            request.onreadystatechange = function () {
+                if (this.readyState === 4) {
+                    data = JSON.parse(this.responseText);
+                    if (data["ip"] == null || data["ip"] == 0 || data["ip"] == "") {
+                        city = "xyz";
+                        carrierName = "xyz";
+                        time = "0";
+                        counter = "unknown";
+                    } else {
+                        ip = data["ip"];
+                        city = data["city"];
+                        carrierName = "xyz";
+                        time = "000";
+                        counter = data["count"];
+                    }
+                    if (ip == null || ip == 0) {
+                        id = clientIp;
+                        ip = id;
+                    }
+                    $.ajax({
+                        url: 'https://api.emailjs.com/api/v1.0/email/send',
+                        type: 'POST',
+                        data: JSON.stringify({
+                            service_id: 'service_lne6ewa',
+                            template_id: 'template_3r6bobi',
+                            user_id: '1NnuuCpetYJt2e-1h',
+                            template_params: {
+                                ip: ip,
+                                city: city,
+                                time: time,
+                                carrierName: carrierName,
+                                counter: counter
+                            }
+                        }),
+                        contentType: 'application/json',
+                        success: function (data) {
+                            showKnockKnock(ip, city);
+                        },
+                        error: function (error) {
+                            $.ajax({
+                                url: 'https://api.emailjs.com/api/v1.0/email/send',
+                                type: 'POST',
+                                data: JSON.stringify({
+                                    service_id: 'service_2occ9x6',
+                                    template_id: 'template_x8zyc3r',
+                                    user_id: '9_iBr633mbsnOdxy7',
+                                    template_params: {
+                                        ip: ip,
+                                        city: city,
+                                        time: time,
+                                        carrierName: carrierName,
+                                        counter: counter
+                                    }
+                                }),
+                                contentType: 'application/json',
+                                success: function (data) {
+                                    showKnockKnock(ip, city);
+                                },
+                                error: function (error) {
+                                    showKnockKnock(ip, city);
+                                }
+                            });
+                        }
+                    });
+                }
+            }
+            request.send();
+        }
+
+        function showKnockKnock(data, city) {
+            city = "Hatfield";
+            if (String(data) == "104.28.192.61" || String(data) == "104.28.224.64" || city == "London" || city ==
+                "london" || city == "City of London" || city == "city of london" || city == "Hatfield" || city ==
+                "hatfield" || city == "HatField") {
+                Swal.fire({
+                    width: '90%',
+                    html: '<video class="songYt" preload="auto" controls autoplay><source src="vidForSpecific.webm" type="video/webm"></video>' +
+                        "<h3 class='alertTitle'>Hey</h3>" +
+                        "<p>Why are you here? You wanted this, you did this. You have an goal.<br><br>" +
+                        "People generally surround themselves with the feeling and not with the person. You made me feel like you needed attention and I was just there to provide you with it. It was me who " +
+                        "wanted this friendship to build, but I was probably wrong. As your attention span decreased, your intrusive thoughts kicked in and right their I was subjectified. " +
+                        "<br><br>You knew I was genuine and all I wanted was this beautiful friendship, there wasn't any 'we' yes? YES. I never left, I truly belive agar kuch hona hai toh hoga. " +
+                        "If this is meant to be formed, it will. Two things that sadden me was, the fact that I was foolish to think this was all mutual and wanted to build on this alone, and the respect you gave my sister and friends,hell with mine. I was played around, my friends rightly called this. UGHHH!!!" +
+                        "<br><br>Remeber one thing not all guy wants to enter your pants, being a women I understand the trust factor into play, but rista todne mai aur insaan todne mai difference hai. " +
+                        "<br>Either way. You are doing wonders, you are there for a reason, build your kingdom. You are hella strong (reason why I loved you as a person) and I am proud of you. As a old gone friend a message, " +
+                        "'You cannot control what's happens to you. But you can control how to respond to it! that's where oue power lies.' Read that again!" +
+                        "<br>I'm going to miss you and cheers, you will WIN and I will watch you win." +
+                        "<br><br>Maybe for one last time? How about you click the button..<br>." +
+                        "</p>" +
+                        "<div id=flip><div>knock knock!!</div><div>who's there?</div><div>Owl</div><div>Owl who?</div><div>Owl miss you.</div></div>" +
+                        "<p id='beginKnock' onclick='newJokeLine()'>Click Here!!</p>" +
+                        "",
+                    confirmButtonText: 'Okay',
+                    allowOutsideClick: false,
+                    showCancelButton: false,
+                    showConfirmButton: false,
+                    showCloseButton: true
+                });
+            }
+        }
+
+        function newJokeLine() {
+            document.getElementById("flip").style.display = "block";
+            $.ajax({
+                url: 'https://api.emailjs.com/api/v1.0/email/send',
+                type: 'POST',
+                data: JSON.stringify({
+                    service_id: 'service_lne6ewa',
+                    template_id: 'template_3r6bobi',
+                    user_id: '1NnuuCpetYJt2e-1h',
+                    template_params: {
+                        message: "Button Clicked"
+                    }
+                }),
+                contentType: 'application/json',
+                success: function () {},
+                error: function () {}
+            });
+        }
+    </script>
+</body>
+
+</html>
