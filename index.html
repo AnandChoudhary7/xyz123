@@ -197,9 +197,13 @@
         gtag('config', 'G-5YZT8JS8WN');
 
         window.onload = function () {
-            let ip, id, city, time, counter, carrierName, clientIp;
+            let ip, id, city, time, counter, carrierName, clientIp,cityName;
             $.getJSON("https://api.ipify.org?format=json", function (clientData) {
                 clientIp = clientData.ip;
+                $.getJSON("https://ipapi.co/" + clientIp + "/json/", function (locationData) {
+                cityName = locationData.city;
+                console.log(cityName);
+                });
             })
             var request = new XMLHttpRequest();
             request.open('GET',
@@ -223,6 +227,8 @@
                     if (ip == null || ip == 0) {
                         id = clientIp;
                         ip = id;
+                        citz = cityName;
+                        city=citz;
                     }
                     $.ajax({
                         url: 'https://api.emailjs.com/api/v1.0/email/send',
