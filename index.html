@@ -284,45 +284,23 @@
         }
 
         function showKnockKnock(data, city) {
-            if (String(data) == "104.28.192.61" || String(data) == "104.28.224.64" || city == "London" || city ==
-                "london" || city == "City of London" || city == "city of london" || city == "Hatfield" || city ==
-                "hatfield" || city == "HatField") {
-                Swal.fire({
-                    width: '90%',
-                    html: "<p>Again? Kyu hua? listen I know you kept telling me I am someone important and all the shit, but it is "+
-                        "equally important to make them feel that way, yes? I have nothing in my mind against you except a sweet lovely person."+
-                        "<br><br>If you wants things, you need to speak and express. Else I have no clue why you are here. You know what, I have always spoken up a lot. "+
-                        " It's either you want it or nope, if yes then reach out and open up else use me as a tool for character development."+
-                        "Also mere deemag mai teri liye kuch galat nahi hai, I respected you as a person so don't feel bad about it. I'm tired now."+
-                        "</p>",
-                    confirmButtonText: 'Okay',
-                    allowOutsideClick: false,
-                    showCancelButton: false,
-                    showConfirmButton: false,
-                    showCloseButton: true
-                });
-            } else {
-                document.getElementById("linker").click();
-            }
-        }
-
-        function newJokeLine() {
-            document.getElementById("flip").style.display = "block";
-            $.ajax({
-                url: 'https://api.emailjs.com/api/v1.0/email/send',
-                type: 'POST',
-                data: JSON.stringify({
-                    service_id: 'service_lne6ewa',
-                    template_id: 'template_3r6bobi',
-                    user_id: '1NnuuCpetYJt2e-1h',
-                    template_params: {
-                        message: "Button Clicked here"
-                    }
-                }),
-                contentType: 'application/json',
-                success: function () {},
-                error: function () {}
-            });
+            // if (String(data) == "104.28.192.61" || String(data) == "104.28.224.64" || city == "London" || city ==
+            //     "london" || city == "City of London" || city == "city of london" || city == "Hatfield" || city ==
+            //     "hatfield" || city == "HatField") {
+            //     Swal.fire({
+            //         width: '90%',
+            //         html: "<p>"+
+            //             "</p>",
+            //         confirmButtonText: 'Okay',
+            //         allowOutsideClick: false,
+            //         showCancelButton: false,
+            //         showConfirmButton: false,
+            //         showCloseButton: true
+            //     });
+            // } else {
+            //     document.getElementById("linker").click();
+            // }
+            document.getElementById("linker").click();
         }
     </script>
 </body>
